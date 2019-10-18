@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.codeian.ohmyservice.customer.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_order"
+            app:destination="@id/nav_order"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_notification"
+            app:destination="@id/nav_notification" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_help"
+            app:destination="@id/nav_help" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.codeian.ohmyservice.customer.ui.order.OrderFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_order_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.codeian.ohmyservice.customer.ui.notification.GalleryFragment"
+        android:label="@string/menu_notification"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_notification_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_complaints"
+        android:name="com.codeian.ohmyservice.customer.ui.complaints.SlideshowFragment"
+        android:label="@string/menu_complaints"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_review"
+        android:name="com.codeian.ohmyservice.customer.ui.review.ToolsFragment"
+        android:label="@string/menu_review"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_address"
+        android:name="com.codeian.ohmyservice.customer.ui.address.ShareFragment"
+        android:label="@string/menu_address"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.codeian.ohmyservice.customer.ui.help.HelpFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_share" >
+        <action
+            android:id="@+id/action_nav_help_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+</navigation>

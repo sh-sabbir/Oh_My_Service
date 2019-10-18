@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_order"
+            android:title="@string/menu_order" />
+        <item
+            android:id="@+id/nav_notification"
+            android:title="@string/menu_notification" />
+        <item
+            android:id="@+id/nav_complaints"
+            android:title="@string/menu_complaints" />
+        <item
+            android:id="@+id/nav_review"
+            android:title="@string/menu_review" />
+        <item
+            android:id="@+id/nav_address"
+            android:title="@string/menu_address" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_help"
+                android:title="@string/menu_help" />
+        </menu>
+    </item>
+
+</menu>
