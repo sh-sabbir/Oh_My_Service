@@ -11,30 +11,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".Splash" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".LoginOne" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".LoginTwo" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".serviceprovider.Profile"></activity>
+        <activity
+            android:name=".customer.Profile"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginThree" android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name=".Splash"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginOne"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginTwo"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".LoginThree"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".customer.Complete" />
         <activity android:name=".customer.Confirmation" />
         <activity
             android:name=".customer.Main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".serviceprovider.Confirmation" />
         <activity android:name=".serviceprovider.Complete" />
-
     </application>
 
 </manifest>
