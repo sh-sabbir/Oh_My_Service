@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
 
     implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'com.github.florent37:expansionpanel:1.2.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

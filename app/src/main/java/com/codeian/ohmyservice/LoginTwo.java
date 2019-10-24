@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,8 +80,19 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_two);
 
-        Intent intent = getIntent();
-        userType = intent.getStringExtra(userType);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                userType= null;
+            } else {
+                userType= extras.getString("userType");
+            }
+        } else {
+            userType= (String) savedInstanceState.getSerializable("userType");
+        }
+
+        Log.d("UserType:",userType);
+
         // Restore instance state
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
@@ -94,6 +106,17 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
         sendCode = findViewById(R.id.sendCode);
         verifyCode = findViewById(R.id.verifyCode);
         btnResend = findViewById(R.id.resendCode);
+
+        ImageView goBack = findViewById(R.id.goBack);
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginTwo.this, LoginOne.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         sendCode.setOnClickListener(this);
         verifyCode.setOnClickListener(this);
@@ -374,16 +397,6 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
                 finish();
             }
 
-            // Signed in
-//            mPhoneNumberViews.setVisibility(View.GONE);
-//            mSignedInViews.setVisibility(View.VISIBLE);
-//
-//            enableViews(mPhoneNumberField, mVerificationField);
-//            mPhoneNumberField.setText(null);
-//            mVerificationField.setText(null);
-//
-//            mStatusText.setText(R.string.signed_in);
-//            mDetailText.setText(getString(R.string.firebase_status_fmt, user.getUid()));
         }
     }
 

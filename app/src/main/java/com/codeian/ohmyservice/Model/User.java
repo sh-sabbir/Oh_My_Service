@@ -5,7 +5,7 @@ package com.codeian.ohmyservice.Model;
  */
 
 public class User {
-    public String name, area, address, type, service, status;
+    public String name, area, address, type, service, status, shopName;
 
     public User(){
 
@@ -19,10 +19,10 @@ public class User {
         this.status = status;
     }
 
-    public User(String name, String area, String address, String service, String type, String status) {
+    public User(String name, String area, String shopName, String service, String type, String status) {
         this.name = name;
         this.area = area;
-        this.address = address;
+        this.shopName = shopName;
         this.service = service;
         this.type = type;
         this.status = status;
@@ -74,5 +74,13 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 }

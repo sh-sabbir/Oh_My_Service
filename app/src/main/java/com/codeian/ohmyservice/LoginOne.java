@@ -18,11 +18,11 @@ public class LoginOne extends AppCompatActivity {
         btnCustomer = findViewById(R.id.btnCustomer);
         btnServiceProvider = findViewById(R.id.btnServiceProvider);
 
+        final Intent intent = new Intent(LoginOne.this, LoginTwo.class);
 
         btnCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginOne.this, LoginTwo.class);
                 intent.putExtra("userType", "customer");
                 startActivity(intent);
                 finish();
@@ -32,7 +32,6 @@ public class LoginOne extends AppCompatActivity {
         btnServiceProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginOne.this, LoginTwo.class);
                 intent.putExtra("userType", "serviceProvider");
                 startActivity(intent);
                 finish();
