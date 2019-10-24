@@ -68,6 +68,7 @@
                 android:elevation="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
@@ -140,6 +141,7 @@
                 app:counterMaxLength="300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="3"

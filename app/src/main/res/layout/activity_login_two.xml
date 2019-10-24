@@ -39,6 +39,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <LinearLayout
+            android:id="@+id/phoneInput"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -65,6 +67,7 @@
                 android:elevation="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -74,7 +77,87 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/go_next"
+            android:id="@+id/otpView"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Verification Code"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="8dp"/>
+
+            <com.chaos.view.PinView
+                android:id="@+id/otpPinView"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:hint="Hint."
+                android:inputType="number"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorColor="@color/colorPrimaryDark"
+                app:cursorWidth="2dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="6"
+                app:itemHeight="40dp"
+                app:itemRadius="3dp"
+                app:itemSpacing="8dp"
+                app:itemWidth="35dp"
+                app:lineColor="@color/colorPrimaryDark"
+                app:lineWidth="1dp"
+                app:viewType="rectangle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wait before resend: 32s"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/resendCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resend code"
+                android:textColor="#f00"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sendCode"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="#202441"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:text="Next" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_next"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/verifyCode"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">

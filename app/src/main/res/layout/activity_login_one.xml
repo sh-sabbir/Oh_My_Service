@@ -46,12 +46,14 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
 
             <Button
+                android:id="@+id/btnCustomer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Customer"
                 style="@style/loginBtn"/>
 
             <Button
+                android:id="@+id/btnServiceProvider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Service Provider"

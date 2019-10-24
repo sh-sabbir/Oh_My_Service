@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.codeian.ohmyservice">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".serviceprovider.Profile"></activity>
         <activity
-            android:name=".customer.Profile"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".Splash"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,17 +22,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Splash"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".LoginOne"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginTwo"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LoginThree"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".serviceprovider.Profile"/>
+        <activity
+            android:name=".customer.Profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".customer.Complete" />
         <activity android:name=".customer.Confirmation" />
         <activity

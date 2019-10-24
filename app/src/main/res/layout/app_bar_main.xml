@@ -27,22 +27,15 @@
     <include layout="@layout/content_main" />
 
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        style="@style/Widget.MaterialComponents.BottomAppBar"
-        app:backgroundTint="@color/colorPrimaryDark"
-        android:id="@+id/bottomAppBar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_gravity="bottom"
-            app:menu="@menu/bottom_navigation_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.bottomappbar.BottomAppBar>
+        android:id="@+id/bottom_nav"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:layout_gravity="bottom"
+        app:itemIconTint="@color/bottom_nav_colors"
+        app:itemTextColor="@color/bottom_nav_colors"
+        app:menu="@menu/bottom_navigation_menu"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#212540</color>
     <color name="colorAccent">#D81B60</color>
     <color name="service_card_border">#DEDEDE</color>
+
+    <color name="botNav">#8D8D8D</color>
+    <color name="botNavActive">#fff</color>
 </resources>

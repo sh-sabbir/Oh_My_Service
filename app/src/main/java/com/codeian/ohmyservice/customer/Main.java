@@ -1,13 +1,14 @@
 package com.codeian.ohmyservice.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.codeian.ohmyservice.LoginOne;
 import com.codeian.ohmyservice.R;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -21,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -28,11 +30,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ImageView;
+
 
 public class Main extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration,bottomBarConfiguration;
     private Toolbar toolbar;
+
+
+    // [START declare_auth]
+    private FirebaseAuth mAuth;
+    // [END declare_auth]
+
+    ImageView goToProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +53,12 @@ public class Main extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        final BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        final BottomNavigationView bottomAppBar = findViewById(R.id.bottom_nav);
 
         //bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // Passing each menu ID as a set of Ids because each
@@ -71,7 +84,31 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                signOut();
+                return false;
+            }
+        });
 
+        View hView =  navigationView.getHeaderView(0);
+        goToProfile = hView.findViewById(R.id.goToProfile);
+
+        goToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Main.this, Profile.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        Intent intent = new Intent(Main.this, LoginOne.class);
+        startActivity(intent);
+        finish();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -95,12 +132,13 @@ public class Main extends AppCompatActivity {
         }
     };
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        inflater.inflate(R.menu.main, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//        return true;
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {
