@@ -77,20 +77,23 @@ public class Splash extends AppCompatActivity {
         connectedUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User userData= dataSnapshot.getValue(User.class);
+                if(dataSnapshot.exists()) {
+                    User userData = dataSnapshot.getValue(User.class);
 
-                String uType, uName, uArea, uShopName, uStatus;
-                uType = userData.getType();
-                uName = userData.getName();
-                uArea = userData.getArea();
+                    String uType, uName, uArea, uShopName, uStatus;
+                    uType = userData.getType();
+                    uName = userData.getName();
+                    uArea = userData.getArea();
+                    uStatus = userData.getStatus();
 
-                if(uType.equals("serviceProvider")){
-                    uShopName = userData.getShopName();
-                    uStatus   = userData.getStatus();
+                    if (uType.equals("serviceProvider")) {
+                        uShopName = userData.getShopName();
 
-                    redirectUser(uType, uName, uArea, uShopName, uStatus);
-                }else{
-                    redirectUser(uType, uName, uArea, uShopName = null, uStatus = null);
+
+                        redirectUser(uType, uName, uArea, uShopName, uStatus);
+                    } else {
+                        redirectUser(uType, uName, uArea, uShopName = null, uStatus);
+                    }
                 }
 
             }
@@ -124,8 +127,11 @@ public class Splash extends AppCompatActivity {
             Intent intent = new Intent(Splash.this, Dashboard.class);
             startActivity(intent);
             finish();
-        }
-        else {
+        }else if(type.equals("customer") && uStatus.equals("0")){
+            Intent intent = new Intent(Splash.this, com.codeian.ohmyservice.customer.Profile.class);
+            startActivity(intent);
+            finish();
+        }else if(type.equals("customer") && uStatus.equals("2")){
             Intent intent = new Intent(Splash.this, Main.class);
             startActivity(intent);
             finish();

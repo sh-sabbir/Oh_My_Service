@@ -20,6 +20,8 @@ import com.chaos.view.PinView;
 import com.codeian.ohmyservice.Model.User;
 import com.codeian.ohmyservice.customer.Main;
 import com.codeian.ohmyservice.customer.Profile;
+import com.codeian.ohmyservice.serviceprovider.Confirmation;
+import com.codeian.ohmyservice.serviceprovider.Dashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,8 +34,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -275,6 +280,7 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
                             Log.d(TAG, "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
+
                             // [START_EXCLUDE]
                             updateUI(STATE_SIGNIN_SUCCESS, user);
                             // [END_EXCLUDE]
@@ -367,7 +373,19 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
                 //mDetailText.setText(R.string.status_sign_in_failed);
                 break;
             case STATE_SIGNIN_SUCCESS:
+
+                String name = user.getDisplayName();
+                if(name == null){
+                    checkUserExist(user);
+                }else{
+                    Intent intent = new Intent(LoginTwo.this, Main.class);
+                    startActivity(intent);
+                    finish();
+                }
+
                 Log.e("Success","Login Success");
+
+
                 // Np-op, handled by sign-in check
                 break;
         }
@@ -379,18 +397,7 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
 
             String name = user.getDisplayName();
             if(name == null){
-                createProfile(user);
-
-                if(userType == "customer"){
-                    Intent intent = new Intent(LoginTwo.this, Profile.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Intent intent = new Intent(LoginTwo.this, com.codeian.ohmyservice.serviceprovider.Profile.class);
-                    startActivity(intent);
-                    finish();
-                }
-
+                checkUserExist(user);
             }else{
                 Intent intent = new Intent(LoginTwo.this, Main.class);
                 startActivity(intent);
@@ -400,6 +407,65 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    private void checkUserExist(final FirebaseUser user){
+        DatabaseReference connectedUser = mDatabase.child(user.getUid());
+        connectedUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+
+                    User userData = dataSnapshot.getValue(User.class);
+
+                    String uType;
+                    uType = userData.getType();
+
+                    if (uType == null) {
+                        createProfile(user);
+                        if (userType.equals("customer")) {
+                            Intent intent = new Intent(LoginTwo.this, Profile.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(LoginTwo.this, com.codeian.ohmyservice.serviceprovider.Profile.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }else{
+                        if (uType.equals("customer")) {
+                            Intent intent = new Intent(LoginTwo.this, Main.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(LoginTwo.this, Dashboard.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }else {
+                    createProfile(user);
+                    if (userType.equals("customer")) {
+                        Intent intent = new Intent(LoginTwo.this, Profile.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(LoginTwo.this, com.codeian.ohmyservice.serviceprovider.Profile.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Profile", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+    }
+
     private void createProfile(final FirebaseUser user){
         final String name,area,address,type,status;
 
@@ -407,22 +473,22 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
         area = "";
         address = "";
         type = userType;
-        status = "pending";
+        status = "0";
 
         User userData = new User(name,area,address,type,status);
 
         mDatabase.child(user.getUid())
-                .setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(name).build();
-                    user.updateProfile(profileUpdates);
-                } else {
-                    //display a failure message
-                    Toast.makeText(LoginTwo.this,"Error creating profile!", Toast.LENGTH_LONG).show();
-                }
+            .setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
+        @Override
+        public void onComplete(@NonNull Task<Void> task) {
+            if (task.isSuccessful()) {
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name).build();
+                user.updateProfile(profileUpdates);
+            } else {
+                //display a failure message
+                Toast.makeText(LoginTwo.this,"Error creating profile!", Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
