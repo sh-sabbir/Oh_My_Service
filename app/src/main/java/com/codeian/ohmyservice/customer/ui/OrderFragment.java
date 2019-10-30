@@ -1,4 +1,4 @@
-package com.codeian.ohmyservice.customer.ui.order;
+package com.codeian.ohmyservice.customer.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

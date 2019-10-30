@@ -1,4 +1,4 @@
-package com.codeian.ohmyservice.customer.ui.home;
+package com.codeian.ohmyservice.customer.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,7 +20,7 @@ import com.codeian.ohmyservice.R;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+
 
     public HomeFragment(){
         setHasOptionsMenu(true);
@@ -34,8 +34,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 

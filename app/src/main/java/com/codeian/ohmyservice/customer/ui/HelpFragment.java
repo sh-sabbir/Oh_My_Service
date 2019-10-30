@@ -1,4 +1,4 @@
-package com.codeian.ohmyservice.customer.ui.help;
+package com.codeian.ohmyservice.customer.ui;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -1,24 +1,18 @@
 package com.codeian.ohmyservice.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codeian.ohmyservice.Model.NewService;
 import com.codeian.ohmyservice.R;
 import com.codeian.ohmyservice.serviceprovider.Services;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +25,6 @@ public class MyServicesAdapter extends RecyclerView.Adapter<MyServicesAdapter.Vi
     private Context mContext;
     private final ArrayList mData;
     private DatabaseReference mDatabase;
-    //Map<String, Object> myServices;
 
     public MyServicesAdapter(Map<String, Object> myServices, Context context) {
         mData = new ArrayList();

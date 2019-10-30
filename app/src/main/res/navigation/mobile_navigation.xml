@@ -7,43 +7,43 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.codeian.ohmyservice.customer.ui.home.HomeFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_order"
-        android:name="com.codeian.ohmyservice.customer.ui.order.OrderFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.OrderFragment"
         android:label="@string/menu_order"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.codeian.ohmyservice.customer.ui.notification.GalleryFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.NotificationFragment"
         android:label="@string/menu_notification"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_complaints"
-        android:name="com.codeian.ohmyservice.customer.ui.complaints.SlideshowFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.ComplaintsFragment"
         android:label="@string/menu_complaints"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_review"
-        android:name="com.codeian.ohmyservice.customer.ui.review.ToolsFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.ReviewFragment"
         android:label="@string/menu_review"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_address"
-        android:name="com.codeian.ohmyservice.customer.ui.address.ShareFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.AddressFragment"
         android:label="@string/menu_address"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_help"
-        android:name="com.codeian.ohmyservice.customer.ui.help.HelpFragment"
+        android:name="com.codeian.ohmyservice.customer.ui.HelpFragment"
         android:label="@string/menu_help"
         tools:layout="@layout/fragment_share" />
 

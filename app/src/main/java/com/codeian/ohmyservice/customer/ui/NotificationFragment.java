@@ -1,4 +1,4 @@
-package com.codeian.ohmyservice.customer.ui.notification;
+package com.codeian.ohmyservice.customer.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,22 +14,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.codeian.ohmyservice.R;
 
-public class GalleryFragment extends Fragment {
+public class NotificationFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }
