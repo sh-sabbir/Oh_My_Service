@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".serviceprovider.Services"
+        <activity android:name=".customer.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".serviceprovider.Services"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".serviceprovider.Orders"
+        <activity
+            android:name=".serviceprovider.Orders"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".serviceprovider.Dashboard"

@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.codeian.ohmyservice.LoginOne;
+import com.codeian.ohmyservice.Model.User;
 import com.codeian.ohmyservice.R;
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import android.view.MenuInflater;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,14 +23,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class Main extends AppCompatActivity {
@@ -42,8 +48,14 @@ public class Main extends AppCompatActivity {
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
+    private FirebaseUser user;
+    private DatabaseReference mDatabase;
+
 
     ImageView goToProfile;
+    TextView userName, userRating;
+
+    private String uArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,8 @@ public class Main extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -94,6 +108,8 @@ public class Main extends AppCompatActivity {
 
         View hView =  navigationView.getHeaderView(0);
         goToProfile = hView.findViewById(R.id.goToProfile);
+        userName = hView.findViewById(R.id.userName);
+        userRating = hView.findViewById(R.id.userRating);
 
         goToProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +118,9 @@ public class Main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        setUserMeta();
+        setUserRating();
     }
 
     private void signOut() {
@@ -109,6 +128,45 @@ public class Main extends AppCompatActivity {
         Intent intent = new Intent(Main.this, LoginOne.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setUserMeta(){
+        DatabaseReference connectedUser = mDatabase.child("users").child(user.getUid());
+        connectedUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User userData= dataSnapshot.getValue(User.class);
+
+                userName.setText(userData.getName());
+                uArea = userData.getArea();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Profile", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+    }
+
+    private void setUserRating(){
+        DatabaseReference connectedUser = mDatabase.child("avg_rating").child(user.getUid());
+        connectedUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String rating = (String) dataSnapshot.getValue().toString();
+
+                userRating.setText(rating);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Profile", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -132,13 +190,6 @@ public class Main extends AppCompatActivity {
         }
     };
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        inflater.inflate(R.menu.main, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//        return true;
-//    }
 
     @Override
     public boolean onSupportNavigateUp() {

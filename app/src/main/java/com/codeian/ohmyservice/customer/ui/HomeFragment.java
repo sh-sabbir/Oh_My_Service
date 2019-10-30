@@ -1,5 +1,6 @@
 package com.codeian.ohmyservice.customer.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -7,20 +8,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.codeian.ohmyservice.R;
+import com.codeian.ohmyservice.customer.SearchActivity;
+import com.google.android.material.card.MaterialCardView;
 
 public class HomeFragment extends Fragment {
 
-
+    private MaterialCardView sAppRepair,sCarRepair,sCarTuning,
+            sCarRent,sShiftingService,sCarWash,sCleanService,
+            sEventManagement,sCatering;
 
     public HomeFragment(){
         setHasOptionsMenu(true);
@@ -37,17 +38,99 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        sAppRepair = root.findViewById(R.id.sAppRepair);
+        sCarRepair = root.findViewById(R.id.sCarRepair);
+        sCarTuning = root.findViewById(R.id.sCarTuning);
+        sCarRent   = root.findViewById(R.id.sCarRent);
+        sShiftingService = root.findViewById(R.id.sShiftingService);
+        sCarWash = root.findViewById(R.id.sCarWash);
+        sCleanService = root.findViewById(R.id.sCleanService);
+        sEventManagement = root.findViewById(R.id.sEventManagement);
+        sCatering = root.findViewById(R.id.sCatering);
 
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        sAppRepair.setOnClickListener(triggerSearch);
+        sCarRepair.setOnClickListener(triggerSearch);
+        sCarTuning.setOnClickListener(triggerSearch);
+        sCarRent.setOnClickListener(triggerSearch);
+        sShiftingService.setOnClickListener(triggerSearch);
+        sCarWash.setOnClickListener(triggerSearch);
+        sCleanService.setOnClickListener(triggerSearch);
+        sEventManagement.setOnClickListener(triggerSearch);
+        sCatering.setOnClickListener(triggerSearch);
+
         return root;
     }
 
+    private View.OnClickListener triggerSearch = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            String userAddress = "Amborkhana";
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            intent.putExtra("user_address",userAddress);
+            switch (v.getId()) {
+                case R.id.sAppRepair:
+
+                    intent.putExtra("active_service","Appliance Repair");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sCarRepair:
+
+                    intent.putExtra("active_service","Car Repair");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sCarTuning:
+
+                    intent.putExtra("active_service","Car Tuning");
+                    startActivity(intent);
+
+                    break;
+
+                case R.id.sCarRent:
+
+                    intent.putExtra("active_service","Rent Service");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sShiftingService:
+
+                    intent.putExtra("active_service","Shifting Service");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sCarWash:
+
+                    intent.putExtra("active_service","Car Wash");
+                    startActivity(intent);
+
+                    break;
+
+                case R.id.sCleanService:
+
+                    intent.putExtra("active_service","Cleaning Service");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sEventManagement:
+
+                    intent.putExtra("active_service","Event Management");
+                    startActivity(intent);
+
+                    break;
+                case R.id.sCatering:
+
+                    intent.putExtra("active_service","Catering Service");
+                    startActivity(intent);
+
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+    };
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

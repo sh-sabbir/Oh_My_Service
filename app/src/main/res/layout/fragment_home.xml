@@ -46,6 +46,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sAppRepair"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -72,6 +73,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCarRepair"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -98,6 +100,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCarTuning"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -124,6 +127,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCarRent"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -150,6 +154,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sShiftingService"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -176,6 +181,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCarWash"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -202,6 +208,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCleanService"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -228,6 +235,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sEventManagement"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"
@@ -254,6 +262,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sCatering"
                 style="@style/ServiceCard"
                 android:layout_width="0dp"
                 grid:layout_columnWeight="1"

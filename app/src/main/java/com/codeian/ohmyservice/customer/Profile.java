@@ -25,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -55,7 +54,7 @@ public class Profile extends AppCompatActivity {
         updateUser = findViewById(R.id.go_next);
 
 
-        String[] COUNTRIES = new String[] {"Item 1", "Item 2", "Item 3", "Item 4"};
+        String[] COUNTRIES = new String[] {"Amborkhana", "Zinda Bazar", "Housing Estate", "Bondor", "Mirabazar"};
 
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<String>(

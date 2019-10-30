@@ -50,7 +50,7 @@ public class OrderFragment extends Fragment {
             data.add(String.valueOf(i));
         }
 
-        recyclerView.setAdapter(new ExpandableRecyclerAdapter(data));
+        //recyclerView.setAdapter(new ExpandableRecyclerAdapter(data));
 
         return root;
     }

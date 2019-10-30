@@ -14,25 +14,44 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.codeian.ohmyservice.Model.NewService;
 import com.codeian.ohmyservice.R;
+import com.codeian.ohmyservice.customer.SearchActivity;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ExpandableRecyclerAdapter extends RecyclerView.Adapter<ExpandableRecyclerAdapter.ViewHolder> {
+
+    private Context mContext;
+    private final ArrayList mData;
+    private DatabaseReference mDatabase;
 
     private List<String> repos;
     private SparseBooleanArray expandState = new SparseBooleanArray();
     private Context context;
 
+    String currentKey;
+
     private int selected_position = -1;
 
-    public ExpandableRecyclerAdapter(List<String> repos) {
-        this.repos = repos;
-        //set initial expanded state to false
-        for (int i = 0; i < repos.size(); i++) {
-            expandState.append(i, false);
-        }
+//    public ExpandableRecyclerAdapter(List<String> repos) {
+//        this.repos = repos;
+//        //set initial expanded state to false
+//        for (int i = 0; i < repos.size(); i++) {
+//            expandState.append(i, false);
+//        }
+//    }
+
+    public ExpandableRecyclerAdapter(Map<String, Object> availableListing, Context context) {
+        mData = new ArrayList();
+        mData.addAll(availableListing.entrySet());
+        this.mContext = context;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -45,21 +64,21 @@ public class ExpandableRecyclerAdapter extends RecyclerView.Adapter<ExpandableRe
     @Override
     public void onBindViewHolder(final ExpandableRecyclerAdapter.ViewHolder viewHolder, final  int i) {
 
+        final Map.Entry<String, Object> item = getItem(i);
+
+        currentKey = item.getKey();
+        System.out.println("Key = " + item.getKey() + ", Value = " + item.getValue());
+
+        final NewService service = (NewService) item.getValue();
+
         viewHolder.setIsRecyclable(false);
 
         viewHolder.tvName.setText("Handy Repair Store");
         viewHolder.tvRating.setText("4.8 (85 Reviews)");
 
         // hidden Data
-        viewHolder.tvPrice.setText("400-500 BDT");
-        viewHolder.serviceDetails.setText("Plumbing service details and what works are covered. Also list of tasks can be included. Great your customer with professional behavior so that they feels comfortable to take the service.");
-
-
-//        Picasso.with(context)
-//                .load(repos.get(i).getOwner().getImageUrl())
-//                .resize(500, 500)
-//                .centerCrop()
-//                .into(viewHolder.ivOwner);
+        viewHolder.tvPrice.setText(service.getSpPrice()+" BDT");
+        viewHolder.serviceDetails.setText(service.getSpDetails());
 
         //check if view is expanded
         final boolean isExpanded = expandState.get(i);
@@ -83,7 +102,11 @@ public class ExpandableRecyclerAdapter extends RecyclerView.Adapter<ExpandableRe
 
     @Override
     public int getItemCount() {
-        return repos.size();
+        return mData.size();
+    }
+
+    public Map.Entry<String, Object> getItem(int position) {
+        return (Map.Entry) mData.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
