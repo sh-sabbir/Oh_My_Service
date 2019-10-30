@@ -1,8 +1,5 @@
 package com.codeian.ohmyservice.Model;
 
-/**
- * Created by Belal on 4/15/2018.
- */
 
 public class User {
     public String name, area, address, type, service, status, shopName;

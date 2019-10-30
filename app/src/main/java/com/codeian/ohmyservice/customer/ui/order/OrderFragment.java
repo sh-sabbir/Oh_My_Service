@@ -7,20 +7,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.codeian.ohmyservice.Adapter.ExpandableRecyclerAdapter;
 import com.codeian.ohmyservice.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderFragment extends Fragment {
 
-    private OrderViewModel sendViewModel;
+    private RecyclerView recyclerView;
+    private List<String> data;
 
     public OrderFragment(){
         setHasOptionsMenu(true);
@@ -34,16 +37,21 @@ public class OrderFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
-                ViewModelProviders.of(this).get(OrderViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_send, container, false);
-        final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root = inflater.inflate(R.layout.fragment_c_order, container, false);
+
+        recyclerView = root.findViewById(R.id.orderList);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        //fetch data and on ExpandableRecyclerAdapter
+        data = new ArrayList<>();
+
+        for (int i = 1; i <= 25; i++) {
+            data.add(String.valueOf(i));
+        }
+
+        recyclerView.setAdapter(new ExpandableRecyclerAdapter(data));
+
         return root;
     }
 

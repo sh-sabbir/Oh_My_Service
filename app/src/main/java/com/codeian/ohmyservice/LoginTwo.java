@@ -6,7 +6,10 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -133,6 +136,38 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
         // [END initialize_auth]
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+
+        //final EditText edt = (EditText) findViewById(R.id.editText1);
+
+        mPhoneNumberField.setText("+880");
+        Selection.setSelection(mPhoneNumberField.getText(), mPhoneNumberField.getText().length());
+
+
+        mPhoneNumberField.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().contains("+880")){
+                    mPhoneNumberField.setText("+880");
+                    Selection.setSelection(mPhoneNumberField.getText(), mPhoneNumberField.getText().length());
+                }
+
+            }
+        });
 
         // Initialize phone auth callbacks
         // [START phone_auth_callbacks]

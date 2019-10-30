@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.codeian.ohmyservice.LoginOne;
+import com.codeian.ohmyservice.LoginTwo;
 import com.codeian.ohmyservice.R;
 import com.codeian.ohmyservice.customer.Main;
 import com.google.android.material.card.MaterialCardView;
@@ -65,6 +66,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.lOrders:
                 makeToast("Order Cliked");
@@ -75,11 +77,16 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.lServices:
-                makeToast("Services Cliked");
+                //makeToast("Services Cliked");
+                intent = new Intent(Dashboard.this, Services.class);
+                startActivity(intent);
+                //finish();
                 break;
 
             case R.id.lProfile:
-                makeToast("Profile Cliked");
+                intent = new Intent(Dashboard.this, Profile.class);
+                startActivity(intent);
+                //makeToast("Profile Cliked");
                 break;
 
             case R.id.lReview:

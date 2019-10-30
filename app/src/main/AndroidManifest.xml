@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".serviceprovider.Dashboard"
+        <activity android:name=".serviceprovider.Services"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".serviceprovider.Orders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".serviceprovider.Dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Splash"
@@ -30,21 +35,26 @@
         <activity
             android:name=".LoginTwo"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".serviceprovider.Profile"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".serviceprovider.Profile"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customer.Profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".customer.Complete"
+        <activity
+            android:name=".customer.Complete"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".customer.Confirmation"
+        <activity
+            android:name=".customer.Confirmation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customer.Main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".serviceprovider.Confirmation"
+        <activity
+            android:name=".serviceprovider.Confirmation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".serviceprovider.Complete"
+        <activity
+            android:name=".serviceprovider.Complete"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
