@@ -31,6 +31,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     implementation 'com.chaos.view:pinview:1.4.3'
     implementation 'com.github.florent37:expansionpanel:1.2.2'

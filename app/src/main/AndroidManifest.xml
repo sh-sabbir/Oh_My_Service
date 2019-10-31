@@ -13,8 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".customer.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".customer.History"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".serviceprovider.History"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".customer.OrderDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".serviceprovider.OrderDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".customer.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".serviceprovider.Services"
             android:theme="@style/AppTheme.NoActionBar" />

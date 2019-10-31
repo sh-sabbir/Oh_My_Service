@@ -14,14 +14,8 @@
             android:id="@+id/nav_notification"
             android:title="@string/menu_notification" />
         <item
-            android:id="@+id/nav_complaints"
-            android:title="@string/menu_complaints" />
-        <item
-            android:id="@+id/nav_review"
-            android:title="@string/menu_review" />
-        <item
-            android:id="@+id/nav_address"
-            android:title="@string/menu_address" />
+            android:id="@+id/nav_help"
+            android:title="@string/menu_help" />
     </group>
 
     <item android:title="">
@@ -29,9 +23,6 @@
             <item
                 android:id="@+id/nav_logout"
                 android:title="LogOut" />
-            <item
-                android:id="@+id/nav_help"
-                android:title="@string/menu_help" />
         </menu>
     </item>
 

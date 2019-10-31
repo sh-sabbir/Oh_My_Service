@@ -89,9 +89,11 @@ public class Splash extends AppCompatActivity {
                     if (uType.equals("serviceProvider")) {
                         uShopName = userData.getShopName();
 
+                        Log.d("Hit:","Type:SP");
 
                         redirectUser(uType, uName, uArea, uShopName, uStatus);
                     } else {
+                        Log.d("Hit:","Type:C");
                         redirectUser(uType, uName, uArea, uShopName = null, uStatus);
                     }
                 }

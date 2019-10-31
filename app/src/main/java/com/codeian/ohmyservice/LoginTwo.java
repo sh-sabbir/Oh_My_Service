@@ -411,9 +411,15 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
                 if(name == null){
                     checkUserExist(user);
                 }else{
-                    Intent intent = new Intent(LoginTwo.this, Main.class);
-                    startActivity(intent);
-                    finish();
+                    if (userType.equals("customer")) {
+                        Intent intent = new Intent(LoginTwo.this, Main.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(LoginTwo.this, Dashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
 
                 Log.e("Success","Login Success");
@@ -432,9 +438,15 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
             if(name == null){
                 checkUserExist(user);
             }else{
-                Intent intent = new Intent(LoginTwo.this, Main.class);
-                startActivity(intent);
-                finish();
+                if (userType.equals("customer")) {
+                    Intent intent = new Intent(LoginTwo.this, Main.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(LoginTwo.this, Dashboard.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
         }
@@ -500,15 +512,22 @@ public class LoginTwo extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void createProfile(final FirebaseUser user){
-        final String name,area,address,type,status;
 
+        final String name,area,address,type,status,shopName,serviceDetails;
+        User userData;
         name = "";
         area = "";
         address = "";
         type = userType;
+        shopName = "";
+        serviceDetails = "";
         status = "0";
 
-        User userData = new User(name,area,address,type,status);
+        if(userType.equals("serviceProvider")){
+            userData = new User(name,area,shopName,serviceDetails,type,status);
+        }else{
+            userData = new User(name,area,address,type,status);
+        }
 
         mDatabase.child(user.getUid())
             .setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {

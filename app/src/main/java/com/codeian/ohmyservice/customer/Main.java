@@ -155,9 +155,12 @@ public class Main extends AppCompatActivity {
         connectedUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String rating = (String) dataSnapshot.getValue().toString();
-
-                userRating.setText(rating);
+                if(dataSnapshot.exists()) {
+                    String rating = (String) dataSnapshot.getValue().toString();
+                    userRating.setText(rating);
+                }else{
+                    userRating.setText("No");
+                }
             }
 
             @Override

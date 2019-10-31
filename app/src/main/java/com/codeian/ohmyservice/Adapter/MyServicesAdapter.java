@@ -47,7 +47,7 @@ public class MyServicesAdapter extends RecyclerView.Adapter<MyServicesAdapter.Vi
 
         final Map.Entry<String, Object> item = getItem(position);
 
-        System.out.println("Key = " + item.getKey() + ", Value = " + item.getValue());
+        //System.out.println("Key = " + item.getKey() + ", Value = " + item.getValue());
 
         final NewService service = (NewService) item.getValue();
         holder.tvServiceName.setText(service.getSpService());

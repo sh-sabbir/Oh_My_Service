@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,15 +19,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.codeian.ohmyservice.Adapter.ExpandableRecyclerAdapter;
-import com.codeian.ohmyservice.Adapter.MyServicesAdapter;
+import com.codeian.ohmyservice.Adapter.ServiceListingAdapter;
+import com.codeian.ohmyservice.Helpers.GenerateRandomString;
 import com.codeian.ohmyservice.Model.NewService;
+import com.codeian.ohmyservice.Model.OrderModal;
 import com.codeian.ohmyservice.Model.User;
 import com.codeian.ohmyservice.R;
-import com.codeian.ohmyservice.serviceprovider.Services;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,9 +36,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -49,11 +53,14 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference mDatabase;
 
-    ExpandableRecyclerAdapter listingAdapter;
+    ServiceListingAdapter listingAdapter;
     Map<String, Object> availableListing;
 
     RecyclerView listingRecycler;
     TextView serviceNotice;
+
+    User uCustomer,uServiceProvider;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +88,14 @@ public class SearchActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(searchTitle);
 
+        uCustomer = new User();
+        uServiceProvider = new User();
+
         areaSelector = findViewById(R.id.areaSelector);
-
         String[] Areas = new String[] {"Amborkhana", "Zinda Bazar", "Housing Estate", "Bondor", "Mirabazar"};
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.address_dropdown_layout,Areas);
-
         areaSelector.setAdapter(adapter);
         areaSelector.setThreshold(100);
-
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -131,8 +137,8 @@ public class SearchActivity extends AppCompatActivity {
         mDatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User userData= dataSnapshot.getValue(User.class);
-                serviceArea = userData.getArea();
+                uCustomer = dataSnapshot.getValue(User.class);
+                serviceArea = uCustomer.getArea();
 
                 getAvailableListing();
                 Log.d("Area",serviceArea);
@@ -166,7 +172,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 String count = String.valueOf(availableListing.size());
 
-                listingAdapter = new ExpandableRecyclerAdapter(availableListing, SearchActivity.this);
+                listingAdapter = new ServiceListingAdapter(availableListing, SearchActivity.this);
                 listingRecycler.setAdapter(listingAdapter);
                 listingAdapter.notifyDataSetChanged();
 
@@ -229,6 +235,42 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+
+    public void createOrder(NewService service, User serviceProvider){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        String orderTime = sdf.format(new Date());
+
+        String key = mDatabase.child("listing").push().getKey();
+        final String shopName = serviceProvider.getShopName();
+        final String orderId= GenerateRandomString.randomString(10);
+        final String sellerPhone = service.getSpPhone();
+
+        String cusID = user.getUid();
+        String sellerID = service.getSpID();
+
+        OrderModal newOrder = new OrderModal(cusID,sellerID,orderId,orderTime,"pending","",service,uCustomer,serviceProvider);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(key, newOrder);
+
+        mDatabase.child("orders").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    Intent intent = new Intent(SearchActivity.this,Confirmation.class);
+                    intent.putExtra("om_id",orderId);
+                    intent.putExtra("om_seller",shopName);
+                    intent.putExtra("om_phone",sellerPhone);
+                    startActivity(intent);
+                    //Log.wtf("Create Service", "Done");
+                } else {
+                    //Log.wtf("Create Service", "createService:onComplete", databaseError.toException());
+                }
+            }
+        });
     }
 
     @Override

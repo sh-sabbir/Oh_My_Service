@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.codeian.ohmyservice.LoginTwo;
 import com.codeian.ohmyservice.Model.User;
 import com.codeian.ohmyservice.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -99,8 +98,8 @@ public class Profile extends AppCompatActivity {
 
     private void updateProfile(final String getName, String getArea, String getAddress) {
 
-        String type = "1";
-        String status = "1";
+        String type = "customer";
+        String status = "2";
         User userData = new User(getName,getArea,getAddress,type,status);
 
         mDatabase.child(user.getUid())

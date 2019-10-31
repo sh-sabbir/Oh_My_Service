@@ -8,8 +8,7 @@
     android:id="@+id/cv"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    tools:backgroundTint="@color/colorPrimaryDark">
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,14 +19,32 @@
         <RelativeLayout
             android:id="@+id/shopTrigger"
             android:layout_width="match_parent"
-            android:layout_height="54dp">
+            android:layout_height="64dp">
 
             <ImageView
                 android:id="@+id/shopIcon"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
-                android:background="#F0F0F0"/>
+                android:background="#F0F0F0"
+                android:layout_centerVertical="true"/>
 
+            <TextView
+                android:id="@+id/orderID"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_alignParentEnd="true"
+                tools:text="#dsfsdfds"/>
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:textSize="12sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="01/11/2019 01:37:23"/>
             <LinearLayout
                 android:id="@+id/shopMeta"
                 android:layout_toEndOf="@+id/shopIcon"
@@ -38,7 +55,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvShopName"
+                    android:id="@+id/serviceName"
                     android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,101 +64,23 @@
                     tools:text="Handy Repair Store"/>
 
                 <TextView
-                    android:id="@+id/tvRating"
+                    android:id="@+id/tvShopName"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    tools:text="4.8 (85 Reviews)"/>
+                    tools:text="Plenty Service"/>
+
+                <TextView
+                    android:textSize="12sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Tap to check details"/>
             </LinearLayout>
-
-
-
-            <!--My dropdown Button -->
-            <View
-                android:id="@+id/closeShop"
-                android:visibility="gone"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_close"
-                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
-        <!--The layout below is my ExpandableLayout -->
-        <LinearLayout
-            android:id="@+id/expandableLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Service Details:"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="@color/txtWhite"/>
-
-
-            <TextView
-                android:id="@+id/serviceDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Plumbing service details and what works are covered. Also list of tasks
-can be included. Great your customer with professional behavior so
-that they feels comfortable to take the service."
-                android:textStyle="normal"
-                android:textSize="12sp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/txtWhite"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageView_Owner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price Range:"
-                    android:textSize="12sp"
-                    android:textColor="@color/txtWhite"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/priceRange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/txtWhite"
-                    android:textStyle="normal"
-                    android:layout_marginStart="8dp"
-                    tools:text="500 - 1000 BDT"/>
-
-
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_gravity="center"
-                android:insetTop="16dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:textAllCaps="false"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                app:rippleColor="@color/colorPrimaryDark"
-                android:text="Hire Now!"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

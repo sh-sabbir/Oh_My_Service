@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.Confirmation">
+    tools:context=".customer.OrderDetails">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -61,7 +61,7 @@
             android:id="@+id/infoShopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Handy Shop"
+            android:text="Shop Name"
             android:textColor="@color/txtWhite"
             android:textSize="18sp" />
 
@@ -80,20 +80,46 @@
         android:gravity="center_horizontal">
 
         <TextView
+            android:id="@+id/orderStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Congratulations!"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="26dp"
+            tools:text="Status"
             android:layout_marginBottom="16dp" />
 
         <TextView
+            android:id="@+id/serName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Service Name: Pest Control"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/serCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Cost: 300BDT"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/dateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Datetime: "
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/ratingData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
-            android:text="We have notified the service provider about your request. Service provider will contact you soon. Or you may contact in advanced to book a suitable appointment!"
-            android:textAlignment="center"
+            tools:text="Rating: "
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16dp" />
 
@@ -105,13 +131,42 @@
             android:text="Call Now"
             android:textColor="@color/colorPrimaryDark"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/actionHome"
-            android:layout_width="200dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/feedback"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.CardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="Home"
-            android:textColor="@color/colorPrimaryDark"/>
+            app:cardPreventCornerOverlap="true"
+            app:contentPadding="16dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/starRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:theme="@style/RatingBar"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="0.5" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/actionRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Give Rating"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

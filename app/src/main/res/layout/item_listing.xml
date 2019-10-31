@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    tools:backgroundTint="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/shopTrigger"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <ImageView
+                android:id="@+id/shopIcon"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:background="#F0F0F0"/>
+
+            <LinearLayout
+                android:id="@+id/shopMeta"
+                android:layout_toEndOf="@+id/shopIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+                        <View
+                            android:layout_width="200dp"
+                            android:layout_height="18dp"
+                            android:background="#dddddd"/>
+
+                        <View
+                            android:layout_marginTop="4dp"
+                            android:layout_width="80dp"
+                            android:layout_height="14dp"
+                            android:background="#dddddd"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <TextView
+                    android:id="@+id/tvShopName"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:text="Handy Repair Store"/>
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:text="4.8 (85 Reviews)"/>
+            </LinearLayout>
+
+
+
+            <!--My dropdown Button -->
+            <View
+                android:id="@+id/closeShop"
+                android:visibility="gone"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_close"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+        <!--The layout below is my ExpandableLayout -->
+        <LinearLayout
+            android:id="@+id/expandableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Service Details:"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/txtWhite"/>
+
+
+            <TextView
+                android:id="@+id/serviceDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Plumbing service details and what works are covered. Also list of tasks
+can be included. Great your customer with professional behavior so
+that they feels comfortable to take the service."
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/txtWhite"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView_Owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price Range:"
+                    android:textSize="12sp"
+                    android:textColor="@color/txtWhite"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/priceRange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/txtWhite"
+                    android:textStyle="normal"
+                    android:layout_marginStart="8dp"
+                    tools:text="500 - 1000 BDT"/>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/orderNow"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_gravity="center"
+                android:insetTop="16dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:rippleColor="@color/colorPrimaryDark"
+                android:text="Hire Now!"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,25 +1,17 @@
-package com.codeian.ohmyservice.customer.ui;
+package com.codeian.ohmyservice.customer;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.codeian.ohmyservice.Adapter.OrderListingAdapter;
 import com.codeian.ohmyservice.Model.OrderModal;
 import com.codeian.ohmyservice.R;
-import com.codeian.ohmyservice.customer.History;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,10 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class OrderFragment extends Fragment {
-
-    private RecyclerView recyclerView;
+public class History extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -42,24 +31,22 @@ public class OrderFragment extends Fragment {
 
     OrderListingAdapter orderAdapter;
     Map<String, Object> orderList;
-
-    public OrderFragment(){
-        setHasOptionsMenu(true);
-    }
-
+    private RecyclerView recyclerView;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+        setContentView(R.layout.activity_history_customer);
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_c_order, container, false);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        recyclerView = root.findViewById(R.id.orderList);
+        getSupportActionBar().setTitle("Order History");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        recyclerView = findViewById(R.id.orderRecycler);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //fetch data and on ServiceListingAdapter
 
@@ -70,10 +57,7 @@ public class OrderFragment extends Fragment {
         orderList = new HashMap<>();
 
         getAvailableListing();
-
-        return root;
     }
-
 
     private void getAvailableListing() {
         mDatabase.child("orders").orderByChild("customerID").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -87,7 +71,7 @@ public class OrderFragment extends Fragment {
                     OrderModal orderData = item_snapshot.getValue(OrderModal.class);
                     key = item_snapshot.getKey();
 
-                    if(orderData.getStatus().equals("pending")){
+                    if(!orderData.getStatus().equals("pending")){
 
                         orderList.put(key,orderData);
 
@@ -96,7 +80,7 @@ public class OrderFragment extends Fragment {
 
                 String count = String.valueOf(orderList.size());
 
-                orderAdapter = new OrderListingAdapter(orderList, getContext());
+                orderAdapter = new OrderListingAdapter(orderList, History.this);
                 recyclerView.setAdapter(orderAdapter);
                 orderAdapter.notifyDataSetChanged();
                 //updateNotice(count);
@@ -113,25 +97,22 @@ public class OrderFragment extends Fragment {
         });
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_settings:
-                Intent intent = new Intent(getContext(), History.class);
-                startActivity(intent);
-
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

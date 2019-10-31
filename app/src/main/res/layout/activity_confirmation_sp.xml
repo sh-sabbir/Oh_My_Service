@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+        android:id="@+id/backToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,26 +54,6 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginBottom="36dp"/>
 
-
-        <LinearLayout
-            android:id="@+id/go_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:textColor="#202441"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:text="Next" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_next"/>
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

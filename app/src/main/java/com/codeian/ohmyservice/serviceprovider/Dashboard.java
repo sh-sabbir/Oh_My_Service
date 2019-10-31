@@ -69,11 +69,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         Intent intent;
         switch (view.getId()) {
             case R.id.lOrders:
-                makeToast("Order Cliked");
+                intent = new Intent(Dashboard.this, Orders.class);
+                startActivity(intent);
                 break;
 
             case R.id.lHistory:
-                makeToast("History Cliked");
+                intent = new Intent(Dashboard.this, History.class);
+                startActivity(intent);
                 break;
 
             case R.id.lServices:
