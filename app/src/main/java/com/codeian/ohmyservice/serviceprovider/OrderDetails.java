@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class OrderDetails extends AppCompatActivity {
 
     String bOrderID,phoneNumber;
-    TextView orderStatus, serName,serCost,dateTime,infoOrderId,infoShopName,cArea,cAddress;
+    TextView orderStatus, serName,serCost,dateTime,infoOrderId,infoShopName,cArea,cAddress,orderRating;
     MaterialButton actionCall,actionDone,actionReject;
     private DatabaseReference mDatabase;
 
@@ -60,6 +60,7 @@ public class OrderDetails extends AppCompatActivity {
         infoOrderId = findViewById(R.id.infoOrderId);
         cArea = findViewById(R.id.cArea);
         cAddress = findViewById(R.id.cAddress);
+        orderRating = findViewById(R.id.orderRating);
 
         actionCall = findViewById(R.id.actionCall);
         actionDone = findViewById(R.id.actionDone);
@@ -105,7 +106,7 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String status;
+                String status,rating;
 
                 OrderModal orderData = dataSnapshot.getValue(OrderModal.class);
 
@@ -114,6 +115,7 @@ public class OrderDetails extends AppCompatActivity {
                 orderStatus.setText(orderData.getStatus());
 
                 status = orderData.getStatus();
+                rating = orderData.getRating();
 
                 dateTime.setText("Order Time: "+orderData.getTime());
                 serName.setText("Customer Name: "+orderData.getuCustomer().getName());
@@ -133,6 +135,10 @@ public class OrderDetails extends AppCompatActivity {
                     actionCall.setVisibility(View.VISIBLE);
                     actionDone.setVisibility(View.VISIBLE);
                     actionReject.setVisibility(View.VISIBLE);
+                }
+
+                if(!rating.isEmpty()){
+                    orderRating.setText("Rating: "+rating);
                 }
             }
 

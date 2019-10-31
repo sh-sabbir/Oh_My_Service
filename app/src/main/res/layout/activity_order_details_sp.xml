@@ -129,6 +129,15 @@
             android:layout_height="wrap_content"
             tools:text="Address: "
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            android:id="@+id/orderRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Rating: "
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16dp"
             android:layout_marginBottom="36dp"/>
 
